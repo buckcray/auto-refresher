@@ -86,11 +86,6 @@ function onStart() {
 /*____________________________________________________________________________________*/
 /* Functions  */
 
-function sendToConsole(e) {
-  console.log(e);
-}
-
-
 function refreshMatchingTabs() {
   chrome.storage.local.get({ tabsForRefresh: [] }, (result) => {
     const tabsForRefresh = result.tabsForRefresh;
@@ -150,8 +145,6 @@ function injectHeader() {
   }); // end of injecting content.js
 };
 
-
-
 chrome.scripting.getRegisteredContentScripts()
   .then((scripts) => {
     scripts.forEach((script) => {
@@ -162,11 +155,9 @@ chrome.scripting.getRegisteredContentScripts()
     console.error(`Error retrieving registered content scripts: ${error}`);
 });
 
-
 /*____________________________________________________________________________________*/
 /* Message Listeners */
 
-// Message Listener for refreshPage
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.refreshStart === 'refreshPage') {
     injectHeader();
@@ -174,8 +165,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 });
 
-
-// Message Listener for PageUpdate
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.refreshStart === 'PageUpdate') {
     injectHeader();
@@ -185,23 +174,38 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 });
 
-/*
-Storage Base
-*/
-
-// On startup event listener 
 chrome.runtime.onInstalled.addListener(()=>{
-  onStart()
+  onStart();
 });
 
 chrome.runtime.onStartup.addListener(()=>{
-  onStart()
+  onStart();
 });
 
-// If a tab is updated, check the URL, if it matches 
+
+/*____________________________________________________________________________________*/
+// End goal required Host Permissions. Commenting it out for now since this isn't required.
+/* 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  if (changeInfo.status === "complete") { // Wait for the page to finish loading
-    injectHeader();
+  // Ensure the tab has finished loading
+  if (changeInfo.status === "complete" && tab.url) {
+    chrome.storage.local.get({ tabsForRefresh: [] }, (results) => {
+      const tabsForRefresh = results.tabsForRefresh || [];
+      // Check if the tab's URL is in the refresh list
+      if (tabsForRefresh.includes(tab.url)) {
+        chrome.scripting.executeScript(
+          {
+            target: { tabId: tabId },
+            files: ["/scripts/content.js"]
+          },
+          () => {
+            // Send a message to the injected script
+            chrome.tabs.sendMessage(tabId, { startHeadDivCreate: true });
+          }
+        );
+      }
+    });
   }
 });
+*/
 

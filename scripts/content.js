@@ -60,39 +60,13 @@ function refreshBarInjection() {
 refreshBarInjection();
 
 
-
+/*____________________________________________________________________________________*/
+// End goal required Host Permissions. Commenting it out for now since this isn't required.
+/*
 chrome.runtime.onMessage.addListener((message,sender,senderResponse) => {
     if (message.startHeadDivCreate) {
         headDivCreate();
+        refreshBarInjection();
     }
 });
-
-// Create a new element responsible for injecting the Bootstrap stylesheet
-function bootstrapStyleSheet() {
-    const bootstrapStyleSheet = document.createElement('link');
-    bootstrapStyleSheet.rel = 'stylesheet';
-    bootstrapStyleSheet.href = chrome.runtime.getURL('/style/bootstrap.min.css')
-    document.head.appendChild(bootstrapStyleSheet);
-};
-
-// onMessage Listener for running the bootstrapStyleSheet(); command
-chrome.runtime.onMessage.addListener((message,sender,senderResponse) => {
-    if (message.startBootstrapStyleSheet) {
-        bootstrapStyleSheet();
-    }
-});
-
-// Creating a new element responsible for injecting the Bootstrap script
-function bootstrapScript() {
-    const bootstrapScript = document.createElement('script');
-    bootstrapScript.scr = chrome.runtime.getURL('/scripts/bootstrap.min.js')
-    document.head.appendChild(bootstrapScript);
-};
-
-chrome.runtime.onMessage.addListener((message,sender,senderResponse) => {
-    if (message.startBootstrapStyleSheet) {
-        bootstrapScript();
-    }
-});
-
-
+*/

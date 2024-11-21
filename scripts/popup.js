@@ -103,7 +103,9 @@ async function setActiveURLVisual() {
   // Build the activeTabUrlList HTML
   tabResults.forEach(({ result, tabId }) => {
     activeTabUrlList = `
-      <li class="list-group-item bg-transparent text-light text-wrap" id="tab-${tabId}">${result}</li>
+      <li class="list-group-item bg-transparent text-light text-wrap" id="tab-${tabId}">
+        <a href="${result}" target="_blank" title="Navigate to an active url" rel="noopener">${result}</a>
+      </li>
     ` + activeTabUrlList;
   });
 
@@ -118,10 +120,11 @@ async function setActiveURLVisual() {
 setActiveURLVisual();
 
 function removeActiveURLVisual(x) {
+  console.log("Starting removeActiveURLVisual(x)")
   const tabID = "tab-" + x;
   const tabIDDoc = document.getElementById(tabID);
   if (tabIDDoc) {
-    tabIDDoc.remove
+    tabIDDoc.remove();
   }
 }
 
@@ -230,7 +233,7 @@ removeTabForRefresh.addEventListener("click", () => {
           chrome.storage.local.set({ tabsForRefresh }, () => {
             console.log(`Removed  ${activeTabUrl} from the refresh list.`);
             setTabStatusInd();
-            removeActiveURLVisual(activeTabID)
+            removeActiveURLVisual(activeTabID);
             chrome.runtime.sendMessage({ refreshStart:"PageUpdate",tabIDRefresh: activeTabID}); // Refresh the tab
           });
         } else {
