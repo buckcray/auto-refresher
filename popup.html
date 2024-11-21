@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Auto Refresh</title>
+  <link rel="stylesheet" href="/styles/popup.css">
+  <link rel="stylesheet" href="/styles/bootstrap.min.css">
+  <script src="/scripts/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+
+
+  <header id="header">
+    <div class="container">
+      <div class="row mx-auto d-flex align-items-center">
+        <div class="col-10 mx-auto m-1 p-1">
+          <h1>Auto Refresher</h1>
+        </div>
+        <div class="col-2 mx-auto d-flex justify-content-center">
+          <div class="me-auto">
+            <input type="checkbox" class="btn-check" id="refreshOffOn">
+            <label class="btn btn-dark border border-black" for="refreshOffOn"
+              id="refreshOffOnLable"></label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <section>
+    <div class="container">
+      <div class="row mx-auto d-flex align-items-center">
+        <div class="col-12 mx-auto d-flex justify-content-center">
+          <h4 class="d-flex align-self-center" id="bannerStatus"></h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="refreshBody">
+    <div class="container">
+      <div class="row mx-auto d-flex align-items-center">
+        <hr>
+        <div class="col-12 mx-auto d-flex justify-content-center">
+          <h3 class="me-auto d-flex align-self-center">Time Duration</h3>
+        </div>
+        <div class="col-12 mx-auto d-flex justify-content-center">
+          <div class="me-auto d-flex">
+            <div>
+              <!-- 30 Seconds Radio Button -->
+              <input type="radio" class="btn-check" name="timeOptions" id="option30" autocomplete="off">
+              <label class="btn hover btn-dark border border-black rounded-pill m-1" for="option30">30 Seconds</label>
+            </div>
+            <div>
+              <!-- 60 Seconds Radio Button -->
+              <input type="radio" class="btn-check" name="timeOptions" id="option60" autocomplete="off">
+              <label class="btn hover btn-dark border border-black rounded-pill m-1" for="option60">60 Seconds</label>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="col-12 mx-auto d-flex justify-content-center">
+          <section id="tabActions" class="me-auto d-flex">
+            <h3 class="d-flex align-self-center">Tab Actions</h3>
+          </section>
+        </div>
+        <div class="col-12 mx-auto d-flex justify-content-center">
+          <div class="me-auto">
+            <input type="button" class="btn-check" id="setTabForRefresh">
+            <label class="btn hover btn-dark border border-black rounded-pill m-1" for="setTabForRefresh">Set This Tab</label>
+            <input type="button" class="btn-check" id="removeTabForRefresh">
+            <label class="btn hover btn-dark border border-black rounded-pill m-1" for="removeTabForRefresh">Remove This Tab</label>
+            <input type="button" class="btn-check" id="refreshNow">
+            <label class="btn hover btn-dark border border-black rounded-pill m-1" for="refreshNow">Refresh Tabs</label>
+            <input type="button" class="btn-check" id="clearRefreshes">
+            <label class="btn hover btn-dark border border-black rounded-pill m-1" for="clearRefreshes">Clear All</label>
+          </div>
+        </div>
+        <hr>
+      </div>
+    </div>
+  </section>
+
+  <section id="activeList">
+    <div class="container">
+      <div class="row mx-auto d-flex align-items-center">
+        <div class="col-4 me-auto d-flex justify-content-center">
+          <h3>Active URL's</h3>
+        </div>
+        <div id="activeURLList" class="col-12 mx-auto d-flex justify-content-center">
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <script src="/scripts/jquery.min.js"></script>
+  <script src="/scripts/popup.js"></script>
+  <script src="/scripts/bootstrap.min.js"></script>
+</body>
+
+</html>

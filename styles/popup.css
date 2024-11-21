@@ -1,0 +1,145 @@
+:root {
+    font-size: 12px;
+    --body-width: 400px;
+    --body-height: 600px;
+}
+
+body {
+    width: var(--body-width);
+    height: var(--body-height);
+    background-color: #252627 !important;
+    color: #F2EFE9 !important;
+}
+
+.hidden {
+    visibility: hidden;
+    display: none;
+}
+
+.shown {
+    visibility: visible;
+    display: inherit;
+}
+
+/*____________________________________________________________________________________*/
+/* Main body */
+
+header {
+    width: 100%;
+    height: auto;
+    padding: 5xp 0;
+    margin-bottom: 25px;
+    background-color: #6F7D8C;
+}
+
+.col-12 {
+    width: auto;
+    height: auto;
+    margin: 1%;
+    padding-bottom: 5px ;
+}
+
+hr {
+    border-top: #F6F6F6 solid 1px !important;
+    box-shadow: -0px 5px 5px #F6F6F6;
+}
+
+label.btn {
+    padding: 10px;
+    background-color: #0000005e;
+}
+
+label.btn.hover:hover {
+    background-color: #F2EFE9 !important;
+    color: #252627 !important;
+}
+
+#bannerStatus {
+    margin-left: 5px;
+}
+
+#numSeconds {
+    width: 50%;
+}
+
+
+
+/*____________________________________________________________________________________*/
+/* Text */
+.h1, .h2, .h3, .h4, .h5, .h6, .p, h1, h2, h3, h4, h5, h6, p {
+    padding: 5px 0;
+    margin: 5px 0;
+  }
+  
+  h1, h2, h3, h4, h5, h6, p {
+    text-align: left;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Allerta Stencil', sans-serif;
+    font-weight: 400;
+    color: #35464D;
+  }
+  
+  .estimatedTime h5 {
+    font-family: 'Time Clock';
+  }
+  
+  .siteTitle, .pageTitle {
+    font-family: 'Kumar One', serif !important;
+  }
+  
+  .siteSubTitle{
+    font-family: 'Libre Barcode 39 Extended Text', system-ui;
+  }
+  
+  .pageSubTitle {
+    color: #6D7C6B !important;
+  }
+  
+  #footerLine {
+    text-align: center;
+    font-family: 'Libre Barcode 39 Extended', system-ui;
+  }
+  
+  .h1, h1 {
+    font-size: 4.5rem;
+  }
+  
+  .h2, h2 {
+    font-size: 3.75rem;
+  }
+  
+  .h3, h3 {
+    font-size: 3rem;
+  }
+  
+  @media (max-width: 719px) {
+    .h3, h3 {
+      font-size: 34px;
+    }
+    .BottomButton {
+      font-size: 20px;
+    }
+  }
+  
+  .h4, h4 {
+    font-size: 2.25rem;
+  }
+  
+  .h5, h5 {
+    font-size: 1.5rem;
+  }
+  
+  .h6, h6 {
+    font-size:1.25rem;
+  }
+  
+  .p, p, pre, .pre {
+    font-size: 1rem;
+    font-family: 'Merriweather', serif;
+  }
+  
+  .text-wrap {
+    overflow-wrap: break-word;
+  }
