@@ -28,6 +28,9 @@ This extension uses the following permissions:
 3. Choose your desired refresh interval (30 or 60 seconds).
 4. The active tab will now refresh automatically at the selected interval.
 
+## Contributing
+Contributions are welcome! Please open an issue or submit a pull request if you have suggestions or improvements.
+
 ## License
 This project is licensed under the [MIT License](LICENSE). 
 
