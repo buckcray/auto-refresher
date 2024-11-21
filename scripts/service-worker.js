@@ -1,6 +1,5 @@
-/*
-On Start Functions/Scripts
-*/
+/*____________________________________________________________________________________*/
+/* On Start Functions/Scripts */
 
 function onStart() {
   // Grabing variables from storage and assigning them to our instance
@@ -23,11 +22,28 @@ function onStart() {
     })
   }); // end of grabing variables from storage
 
-  // Injecting Content.js Script
+  // Injecting content .js
   chrome.storage.local.get('tabsForRefresh', (result) => {
     const patterns = result.tabsForRefresh || [];
-    chrome.scripting.unregisterContentScripts({ ids: ['dynamicScript'] }, () => {
-      if (patterns.length > 0) {
+    chrome.scripting.getRegisteredContentScripts()
+    .then((scripts) => {
+      const scriptExists = scripts.some(script => script.id === 'dynamicScript');
+      if (scriptExists) {
+        chrome.scripting.unregisterContentScripts({ ids: ['dynamicScript'] }, () => {
+          if (patterns.length > 0) {
+            chrome.scripting.registerContentScripts([
+              {
+                id: 'dynamicScript',
+                js: ['/scripts/jquery.min.js','/scripts/content.js'],
+                matches: patterns,
+                runAt: 'document_idle',
+              },
+            ], () => {
+              console.log('Content script updated with new URL patterns.');
+            });
+          }
+        });
+      } else {
         chrome.scripting.registerContentScripts([
           {
             id: 'dynamicScript',
@@ -39,8 +55,14 @@ function onStart() {
           console.log('Content script updated with new URL patterns.');
         });
       }
+    })
+    .catch((error) => {
+      console.error('Error fetching registered content scripts:', error);
     });
   }); // end of injecting content.js
+
+  
+
 
   // Refreshing matching tabs
   chrome.storage.local.get({ tabsForRefresh: [] }, (result) => {
@@ -61,10 +83,8 @@ function onStart() {
   }); // end of refreshing matching tabs
 };
 
-
-/*
-Functions
-*/
+/*____________________________________________________________________________________*/
+/* Functions  */
 
 function sendToConsole(e) {
   console.log(e);
@@ -93,12 +113,29 @@ function refreshMatchingTabs() {
 function injectHeader() {
   chrome.storage.local.get('tabsForRefresh', (result) => {
     const patterns = result.tabsForRefresh || [];
-    chrome.scripting.unregisterContentScripts({ ids: ['dynamicScript'] }, () => {
-      if (patterns.length > 0) {
+    chrome.scripting.getRegisteredContentScripts()
+    .then((scripts) => {
+      const scriptExists = scripts.some(script => script.id === 'dynamicScript');
+      if (scriptExists) {
+        chrome.scripting.unregisterContentScripts({ ids: ['dynamicScript'] }, () => {
+          if (patterns.length > 0) {
+            chrome.scripting.registerContentScripts([
+              {
+                id: 'dynamicScript',
+                js: ['/scripts/jquery.min.js','/scripts/content.js'],
+                matches: patterns,
+                runAt: 'document_idle',
+              },
+            ], () => {
+              console.log('Content script updated with new URL patterns.');
+            });
+          }
+        });
+      } else {
         chrome.scripting.registerContentScripts([
           {
             id: 'dynamicScript',
-            js: ['/scripts/content.js'],
+            js: ['/scripts/jquery.min.js','/scripts/content.js'],
             matches: patterns,
             runAt: 'document_idle',
           },
@@ -106,9 +143,13 @@ function injectHeader() {
           console.log('Content script updated with new URL patterns.');
         });
       }
+    })
+    .catch((error) => {
+      console.error('Error fetching registered content scripts:', error);
     });
-  });
+  }); // end of injecting content.js
 };
+
 
 
 chrome.scripting.getRegisteredContentScripts()
@@ -122,10 +163,8 @@ chrome.scripting.getRegisteredContentScripts()
 });
 
 
-
-/*
-Message Listeners
-*/
+/*____________________________________________________________________________________*/
+/* Message Listeners */
 
 // Message Listener for refreshPage
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -159,34 +198,10 @@ chrome.runtime.onStartup.addListener(()=>{
   onStart()
 });
 
-chrome.runtime.sendMessage({startHeadDivCreate:true});
-chrome.runtime.sendMessage({startBootstrapStyleSheet:true});
-chrome.runtime.sendMessage({startBootstrapScript:true});
-
-chrome.storage.local.get(['tabsForRefresh'], (results) => {
-  const tabsForRefresh = results.tabsForRefresh;
-  sendToConsole("Line 168, tabsForRefresh is " + tabsForRefresh);
-  chrome.tabs.query({url: tabsForRefresh}, (tabs) => {
-  var tabIDtoSend = [];
-  sendToConsole("Line 171, tabIDtoSend is " + tabIDtoSend)
-    tabs.forEach(function(tab){
-      tabIDtoSend.push(tab.id);
-    });
-    sendToConsole("Line 175, tabIDtoSend is " + tabIDtoSend)
-    chrome.runtime.sendMessage({tabsIDtoInjectContentJS:tabIDtoSend})
-  });
-});
-
 // If a tab is updated, check the URL, if it matches 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.status === "complete") { // Wait for the page to finish loading
-    chrome.storage.local.get({ tabsForRefresh: [] }, (results) => {
-      const tabsForRefresh = results.tabsForRefresh;
-      if (tabsForRefresh.includes(tab.url)) {
-        injectHeader(); // Run the inject headers script
-      };
-    })
-    console.log('Tab URL updated to:', tab.url);
+    injectHeader();
   }
 });
 

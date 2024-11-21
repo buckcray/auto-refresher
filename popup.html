@@ -16,14 +16,20 @@
   <header id="header">
     <div class="container">
       <div class="row mx-auto d-flex align-items-center">
-        <div class="col-10 mx-auto m-1 p-1">
+        <div class="col-2 me-auto m-1 p-1">
           <h1>Auto Refresher</h1>
         </div>
-        <div class="col-2 mx-auto d-flex justify-content-center">
-          <div class="me-auto">
-            <input type="checkbox" class="btn-check" id="refreshOffOn">
-            <label class="btn btn-dark border border-black" for="refreshOffOn"
-              id="refreshOffOnLable"></label>
+        <div class="col-8 ms-auto d-flex justify-content-center">
+          <div class="d-flex ms-auto">
+            <div>
+              <!-- 30 Seconds Radio Button -->
+              <input type="radio" class="btn-check" name="offOnControler" id="offOnControlerStart" autocomplete="off">
+              <label class="btn hover btn-dark border border-black rounded-pill m-1" for="offOnControlerStart" id="offOnControlerStartLable">Start</label>
+            </div>
+            <div>
+              <!-- 60 Seconds Radio Button -->
+              <input type="radio" class="btn-check" name="offOnControler" id="offOnControlerStop" autocomplete="off">
+              <label class="btn hover btn-dark border border-black rounded-pill m-1" for="offOnControlerStop" id="offOnControlerStopLable">Stop</label>
           </div>
         </div>
       </div>
@@ -52,12 +58,12 @@
             <div>
               <!-- 30 Seconds Radio Button -->
               <input type="radio" class="btn-check" name="timeOptions" id="option30" autocomplete="off">
-              <label class="btn hover btn-dark border border-black rounded-pill m-1" for="option30">30 Seconds</label>
+              <label class="btn hover btn-dark border border-black rounded-pill m-1" for="option30" id="option30Lable">30 Seconds</label>
             </div>
             <div>
               <!-- 60 Seconds Radio Button -->
               <input type="radio" class="btn-check" name="timeOptions" id="option60" autocomplete="off">
-              <label class="btn hover btn-dark border border-black rounded-pill m-1" for="option60">60 Seconds</label>
+              <label class="btn hover btn-dark border border-black rounded-pill m-1" for="option60" id="option60Lable">60 Seconds</label>
             </div>
           </div>
         </div>
@@ -74,7 +80,7 @@
             <input type="button" class="btn-check" id="removeTabForRefresh">
             <label class="btn hover btn-dark border border-black rounded-pill m-1" for="removeTabForRefresh">Remove This Tab</label>
             <input type="button" class="btn-check" id="refreshNow">
-            <label class="btn hover btn-dark border border-black rounded-pill m-1" for="refreshNow">Refresh Tabs</label>
+            <label class="btn hover btn-dark border border-black rounded-pill m-1" for="refreshNow">Manually Refresh Tabs</label>
             <input type="button" class="btn-check" id="clearRefreshes">
             <label class="btn hover btn-dark border border-black rounded-pill m-1" for="clearRefreshes">Clear All</label>
           </div>

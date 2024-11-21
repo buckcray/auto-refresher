@@ -54,6 +54,36 @@ label.btn.hover:hover {
     color: #252627 !important;
 }
 
+#offOnControlerStop ~ label, #offOnControlerStart ~ label {
+  color:#fff ;
+  background-color:#212529 ;
+  border-color:#212529 ;
+}
+
+#offOnControlerStop ~ label:hover, #offOnControlerStart ~ label:hover {
+  color:#fff;
+  background-color:#424649;
+  border-color:#373b3e;
+}
+
+.focus-button {
+  box-shadow: rgb(66, 70, 73) ;
+}
+
+.active-btn {
+  color: #fff !important;
+  background-color: #4d5154 !important;
+  border-color: #373b3e !important;
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125) !important;
+}
+
+.disabled-button {
+  color: #fff;
+  background-color: #212529;
+  border-color: #212529;
+}
+
+
 #bannerStatus {
     margin-left: 5px;
 }
