@@ -2,6 +2,9 @@
 
 Automatically refreshes web pages every 30 or 60 seconds, ensuring you always stay up-to-date without the need to manually reload.
 
+![image](https://github.com/user-attachments/assets/c1af03be-60fa-46b7-84d0-2106f4bb1413)
+
+
 ## Features
 - Automatically refreshes the current tab at configurable intervals (30 or 60 seconds).
 - Simple and intuitive user interface.
